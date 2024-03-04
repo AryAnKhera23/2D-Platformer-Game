@@ -238,7 +238,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.11964202}
+  m_Offset: {x: 0, y: -0.097560644}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -249,7 +249,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.76071596}
+  m_Size: {x: 1, y: 0.8048787}
   m_EdgeRadius: 0
 --- !u!212 &1287028509
 SpriteRenderer:
@@ -331,12 +331,12 @@ PrefabInstance:
     - target: {fileID: 1173194049959009072, guid: 02e606a6f8d5d484498bca4c34f0e77e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 1173194049959009072, guid: 02e606a6f8d5d484498bca4c34f0e77e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: 1173194049959009072, guid: 02e606a6f8d5d484498bca4c34f0e77e,
         type: 3}
@@ -378,20 +378,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3799122898679522619, guid: 02e606a6f8d5d484498bca4c34f0e77e,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.1187828
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799122898679522619, guid: 02e606a6f8d5d484498bca4c34f0e77e,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.9759809
-      objectReference: {fileID: 0}
     - target: {fileID: 3954408116764224854, guid: 02e606a6f8d5d484498bca4c34f0e77e,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875342097665146758, guid: 02e606a6f8d5d484498bca4c34f0e77e,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e606a6f8d5d484498bca4c34f0e77e, type: 3}

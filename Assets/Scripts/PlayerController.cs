@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
         if (vertical > 0f)
         {
+            //animator.SetTrigger("Jump");
             animator.SetBool("IsJumping", true);
         }
         else if (vertical <= 0f)

@@ -1,63 +1,97 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private CapsuleCollider2D playerCollider;
-    private Vector2 originalColliderSize;
-    private Vector2 originalColliderOffset;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpForce;
+    private bool isGrounded;
 
-    private void Start()
+    private Rigidbody2D rb2D;
+    private Collider2D playerCollider;
+ 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        originalColliderOffset = playerCollider.offset;
-        originalColliderSize = playerCollider.size;
+        Debug.Log("Collided with " + collision);
+        if (collision.gameObject.layer == 8)
+        {
+            isGrounded = true;
+        }
+        
+    }
+    private void Awake()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
-        ProcessRunAnimation();
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        ProcessPlayerAnimations(horizontal);
+        ProcessPlayerMovement(horizontal);
+        
+    }
+
+    
+
+    private void ProcessPlayerMovement(float horizontal)
+    {
+        Vector3 position = transform.position;
+        
+        position.x += horizontal * speed * Time.deltaTime;
+        transform.position = position;
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            isGrounded = false;
+            rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
+        }
+        
+    }
+
+    void ProcessPlayerAnimations(float horizontal)
+    {
+        ProcessRunAnimation(horizontal);
 
         ProcessJumpAnimation();
-        
+
         ProcessCrouchAnimation();
-    
     }
 
-    void ProcessJumpAnimation()
+    void ProcessRunAnimation(float horizontal)
     {
-        float vertical = Input.GetAxisRaw("Vertical");
-
-
-        if (vertical > 0f)
-        {
-            //animator.SetTrigger("Jump");
-            animator.SetBool("IsJumping", true);
-        }
-        else if (vertical <= 0f)
-        {
-            animator.SetBool("IsJumping", false);
-        }
-    }
-
-    void ProcessRunAnimation()
-    {
-        float speed = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", Mathf.Abs(speed));
-
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         Vector3 scale = gameObject.transform.localScale;
-        if (speed < 0f)
+        if (horizontal < 0f)
         {
             scale.x = -1f * Mathf.Abs(scale.x);
         }
-        else if (speed > 0f)
+        else if (horizontal > 0f)
         {
             scale.x = Mathf.Abs(scale.x);
         }
         gameObject.transform.localScale = scale;
     }
+
+    void ProcessJumpAnimation()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            //animator.SetTrigger("Jump");
+            animator.SetBool("IsJumping", true);
+        }
+        else
+        {
+            animator.SetBool("IsJumping", false);
+        }
+    }
+
 
     void ProcessCrouchAnimation()
     {
@@ -72,6 +106,10 @@ public class PlayerController : MonoBehaviour
             //playerCollider.size.Set(originalColliderSize.x, originalColliderSize.y);
         }
     }
+
+    
+
+    
 
 }
 

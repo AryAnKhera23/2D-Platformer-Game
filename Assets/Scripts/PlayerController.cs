@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
@@ -114,9 +115,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-
-    
+    public void PickUpKey()
+    {
+        Debug.Log("Picked up key");
+        scoreManager.IncreaseScore(10);
+    }
+        
 
 }
 

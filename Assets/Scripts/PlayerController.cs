@@ -68,7 +68,11 @@ public class PlayerController : MonoBehaviour
 
     void ProcessRunAnimation(float horizontal)
     {
-        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        if(isGrounded)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        }
+        
 
         Vector3 scale = gameObject.transform.localScale;
         if (horizontal < 0f)

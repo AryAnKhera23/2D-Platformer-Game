@@ -15,13 +15,18 @@ public class PlayerController : MonoBehaviour
  
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with " + collision);
         if (collision.gameObject.layer == 8)
         {
             isGrounded = true;
         }
         
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
+    }
+
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -36,8 +41,7 @@ public class PlayerController : MonoBehaviour
         ProcessPlayerMovement(horizontal);
         
     }
-
-    
+ 
 
     private void ProcessPlayerMovement(float horizontal)
     {
@@ -48,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            isGrounded = false;
             rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
         }
         
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     void ProcessCrouchAnimation()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             animator.SetBool("IsCtrlPressed", true);
             //playerCollider.size.Set(originalColliderSize.x, originalColliderSize.y / 2);

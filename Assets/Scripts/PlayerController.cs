@@ -134,11 +134,18 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Enemy Damaged You!! Lives left: " + healthManager.health );
         if(healthManager.health == 0)
         {
-            gameOverController.PlayerDead();
+            KillPlayer();
         }
     }
+    public void KillPlayer()
+    {
+        Debug.Log("GAME OVER");
+        animator.SetTrigger("PlayerDead");
+        gameOverController.PlayerDead();
+        this.enabled = false;
+    }
 
-    
+
 }
 
 

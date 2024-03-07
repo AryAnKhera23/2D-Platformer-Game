@@ -2287,7 +2287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1412694168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2323,7 +2323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartButton: {fileID: 402505443}
-  returnToMenuButton: {fileID: 0}
+  returnToMenuButton: {fileID: 927581890}
   playerController: {fileID: 1302958371}
 --- !u!114 &1412694171
 MonoBehaviour:

@@ -8,7 +8,7 @@ public class GameOverController : MonoBehaviour
 {
     [SerializeField] Button restartButton;
     [SerializeField] Button returnToMenuButton;
-    [SerializeField] PlayerController playerController;
+   
 
     public void Awake()
     {
@@ -18,7 +18,8 @@ public class GameOverController : MonoBehaviour
     public void PlayerDead()
     {
         gameObject.SetActive(true);
-        playerController.enabled = false;
+        
+        
     }
 
     void ReloadScene()
@@ -30,5 +31,6 @@ public class GameOverController : MonoBehaviour
     private void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
+        gameObject.SetActive(false);
     }
 }

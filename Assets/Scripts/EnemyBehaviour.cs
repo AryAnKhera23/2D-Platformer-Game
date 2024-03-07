@@ -35,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    private bool IsFacingLeft()
+    public bool IsFacingLeft()
     {
         return transform.localScale.x < Mathf.Epsilon;
     }

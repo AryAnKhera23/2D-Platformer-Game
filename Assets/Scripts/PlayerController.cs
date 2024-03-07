@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
-    [SerializeField] private int hearts = 3;
+    [SerializeField] private int hearts;
     private bool isGrounded;
 
     private Rigidbody2D rb2D;
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer()
     {
         hearts--;
-        Debug.Log("Enemy Damaged You!! Lifes left: " + hearts );
+        Debug.Log("Enemy Damaged You!! Lives left: " + hearts );
         if(hearts == 0)
         {
             ReloadScene();

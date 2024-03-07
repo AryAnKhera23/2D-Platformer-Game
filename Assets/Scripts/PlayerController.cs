@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private GameOverController gameOverController;
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
@@ -133,14 +134,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Enemy Damaged You!! Lives left: " + healthManager.health );
         if(healthManager.health == 0)
         {
-            ReloadScene();
+            gameOverController.PlayerDead();
         }
     }
 
-    void ReloadScene()
-    {
-        SceneManager.LoadScene(0);
-    }
+    
 }
 
 

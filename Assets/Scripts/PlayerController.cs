@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,10 +51,13 @@ public class PlayerController : MonoBehaviour
         
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        int currentLayerIndex = animator.GetLayerIndex("Base Layer");
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !animator.GetCurrentAnimatorStateInfo(currentLayerIndex).IsName("Player_Crouch"))
         {
-            rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
+            if (!animator.GetBool("IsCtrlPressed"))
+            {
+                rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
+            }
         }
         
     }
@@ -120,8 +124,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Picked up key");
         scoreManager.IncreaseScore(10);
     }
-        
 
+    public void KillPlayer()
+    {
+        animator.SetBool("IsPlayerDead", true);
+        ReloadScene();
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
 
 

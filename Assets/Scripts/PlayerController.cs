@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private int hearts = 3;
     private bool isGrounded;
 
     private Rigidbody2D rb2D;
@@ -125,10 +126,14 @@ public class PlayerController : MonoBehaviour
         scoreManager.IncreaseScore(10);
     }
 
-    public void KillPlayer()
+    public void DamagePlayer()
     {
-        animator.SetBool("IsPlayerDead", true);
-        ReloadScene();
+        hearts--;
+        Debug.Log("Enemy Damaged You!! Lifes left: " + hearts );
+        if(hearts == 0)
+        {
+            ReloadScene();
+        }
     }
 
     void ReloadScene()

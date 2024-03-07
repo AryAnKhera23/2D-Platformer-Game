@@ -49,7 +49,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController))
         {
-            playerController.KillPlayer();
+            playerController.DamagePlayer();
         }
     }
 }

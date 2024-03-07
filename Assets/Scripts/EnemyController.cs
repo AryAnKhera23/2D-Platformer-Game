@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     { 
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController controller))
         {
-            controller.KillPlayer();
+            controller.DamagePlayer();
         }
     }
 }

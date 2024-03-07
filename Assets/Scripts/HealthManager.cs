@@ -12,12 +12,13 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(Image image in hearts)
+        for (int i = 0; i < hearts.Length; i++)
         {
-            image.sprite = emptyHearts;
+            hearts[i].sprite = emptyHearts;
         }
 
-        for(int i = 0; i < health; i++)
+        
+        for (int i = 0; i < health; i++)
         {
             hearts[i].sprite = fullHearts;
         }

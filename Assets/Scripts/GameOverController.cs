@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class GameOverController : MonoBehaviour
 {
     [SerializeField] Button restartButton;
-    [SerializeField] Button quitButton;
+    [SerializeField] Button returnToMenuButton;
     [SerializeField] PlayerController playerController;
 
     public void Awake()
     {
         restartButton.onClick.AddListener(ReloadScene);
-        quitButton.onClick.AddListener(ApplicationQuit);
+        returnToMenuButton.onClick.AddListener(ReturnToMenu);
     }
     public void PlayerDead()
     {
@@ -27,8 +27,8 @@ public class GameOverController : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    private void ApplicationQuit()
+    private void ReturnToMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

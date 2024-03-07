@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
-    [SerializeField] private int hearts;
     private bool isGrounded;
 
     private Rigidbody2D rb2D;
     private Collider2D playerCollider;
+    private HealthManager healthManager;
  
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        healthManager = GetComponent<HealthManager>();
     }
 
     void Update()
@@ -128,9 +129,9 @@ public class PlayerController : MonoBehaviour
 
     public void DamagePlayer()
     {
-        hearts--;
-        Debug.Log("Enemy Damaged You!! Lives left: " + hearts );
-        if(hearts == 0)
+        healthManager.health--;
+        Debug.Log("Enemy Damaged You!! Lives left: " + healthManager.health );
+        if(healthManager.health == 0)
         {
             ReloadScene();
         }

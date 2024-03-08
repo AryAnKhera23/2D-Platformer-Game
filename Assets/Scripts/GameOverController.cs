@@ -17,9 +17,7 @@ public class GameOverController : MonoBehaviour
     }
     public void PlayerDead()
     {
-        gameObject.SetActive(true);
-        
-        
+        gameObject.SetActive(true); 
     }
 
     void ReloadScene()
@@ -31,6 +29,5 @@ public class GameOverController : MonoBehaviour
     private void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
-        gameObject.SetActive(false);
     }
 }

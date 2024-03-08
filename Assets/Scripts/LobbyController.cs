@@ -9,7 +9,7 @@ public class LobbyController : MonoBehaviour
 {
     [SerializeField] Button playButton;
     [SerializeField] Button exitButton;
-
+    [SerializeField] GameObject levelSelections;
     private void Awake()
     {
         playButton.onClick.AddListener(Play);
@@ -18,7 +18,7 @@ public class LobbyController : MonoBehaviour
 
     private void Play()
     {
-        SceneManager.LoadScene(1);
+        levelSelections.SetActive(true);
     }
 
     private void QuitApplication()

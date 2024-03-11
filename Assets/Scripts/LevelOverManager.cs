@@ -12,9 +12,7 @@ public class LevelOverManager : MonoBehaviour
         {
             if(keyManager.isKeyCollected)
             {
-                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                Debug.Log("Level Over!!");
-                SceneManager.LoadScene(currentSceneIndex + 1);
+                LevelManager.Instance.MarkCurrentLevelComplete();
             }
             else
             {

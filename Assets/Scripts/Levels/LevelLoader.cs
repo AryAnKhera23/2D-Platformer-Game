@@ -15,6 +15,7 @@ namespace Assets.Scripts.Levels
         private Button button;
         [SerializeField] string LevelName;
 
+
         private void Awake()
         {
             button = GetComponent<Button>();
@@ -23,7 +24,23 @@ namespace Assets.Scripts.Levels
 
         private void onClick()
         {
-            SceneManager.LoadScene(LevelName);
+            LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
+
+            switch (levelStatus)
+            {
+                case LevelStatus.Locked:
+                    Debug.Log("Level is Locked!!");
+                    break;
+
+                case LevelStatus.Unlocked:
+                    SceneManager.LoadScene(LevelName);
+                    break;
+
+                case LevelStatus.Completed:
+                    SceneManager.LoadScene(LevelName);
+                    break;
+            }
+            
         }
     }
     

@@ -28,13 +28,15 @@ public class LevelCompleteController : MonoBehaviour
 
     private void LoadMenu()
     {
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         SceneManager.LoadScene(0);
     }
 
     private void LoadNextLevel()
     {
         int nextSceneIndex = levelManager.GetNextSceneIndex();
-        if(nextSceneIndex < levelManager.Levels.Length)
+        SoundManager.Instance.Play(Sounds.ButtonClick);
+        if (nextSceneIndex < levelManager.Levels.Length)
         {
             levelManager.LoadLevel(levelManager.Levels[nextSceneIndex]);
         }

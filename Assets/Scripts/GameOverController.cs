@@ -17,17 +17,20 @@ public class GameOverController : MonoBehaviour
     }
     public void PlayerDead()
     {
+        SoundManager.Instance.Play(Sounds.PlayerDeath);
         gameObject.SetActive(true); 
     }
 
     void ReloadScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         SceneManager.LoadScene(currentSceneIndex);
     }
 
     private void ReturnToMenu()
     {
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         SceneManager.LoadScene(0);
     }
 }

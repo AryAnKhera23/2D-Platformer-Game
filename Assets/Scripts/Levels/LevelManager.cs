@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     private static LevelManager instance;
     public static LevelManager Instance { get { return instance; } }
 
-    [SerializeField] string[] Level;
+    [SerializeField] public string[] Levels;
 
     private void Awake()
     {
@@ -27,9 +27,9 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        if (GetLevelStatus(Level[0]) == LevelStatus.Locked)
+        if (GetLevelStatus(Levels[0]) == LevelStatus.Locked)
         {
-            SetLevelStatus(Level[0], LevelStatus.Unlocked);
+            SetLevelStatus(Levels[0], LevelStatus.Unlocked);
         }
     }
 
@@ -46,19 +46,34 @@ public class LevelManager : MonoBehaviour
 
     internal void MarkCurrentLevelComplete()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        int currentSceneIndex = Array.FindIndex(Level, level => level == currentScene.name);
-        int nextSceneIndex = currentSceneIndex + 1;
+        int currentSceneIndex = GetCurrentSceneIndex();
+        int nextSceneIndex = GetNextSceneIndex();
 
-        Debug.Log(Level[currentSceneIndex] + " Complete!!");
-        SetLevelStatus(Level[currentSceneIndex], LevelStatus.Completed);
+        Debug.Log(Levels[currentSceneIndex] + " Complete!!");
+        SetLevelStatus(Levels[currentSceneIndex], LevelStatus.Completed);
 
-        if (nextSceneIndex < Level.Length)
+        if (nextSceneIndex < Levels.Length)
         {
-            SetLevelStatus(Level[nextSceneIndex], LevelStatus.Unlocked);
-            SceneManager.LoadScene(Level[nextSceneIndex]);
-        }
+            SetLevelStatus(Levels[nextSceneIndex], LevelStatus.Unlocked);
+        }  
+    }
 
-        
+    public int GetNextSceneIndex()
+    {
+        return GetCurrentSceneIndex() + 1;
+    }
+
+    public int GetCurrentSceneIndex()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        int currentSceneIndex = Array.FindIndex(Levels, level => level == currentScene.name);
+        return currentSceneIndex;
+    }
+
+    public void LoadLevel(string level)
+    {
+        if(GetNextSceneIndex() < Levels.Length){
+            SceneManager.LoadScene(level);
+        }
     }
 }

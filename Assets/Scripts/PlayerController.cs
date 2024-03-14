@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
-    [SerializeField] private GameOverController gameOverController;
+    
     [SerializeField] private Animator animator;
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
-    private bool isGrounded;
+    [SerializeField] private float footstepDelay = 0.5f;
+
+    private float footstepTimer;
+    public bool isGrounded;
 
     private Rigidbody2D rb2D;
     private Collider2D playerCollider;
@@ -50,10 +53,30 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessPlayerMovement(float horizontal)
     {
-        Vector3 position = transform.position;
+        ProcessRunMovement(horizontal);
+        ProcessJumpMovement();
+
         
+    }
+
+    void ProcessRunMovement(float horizontal) {
+        Vector3 position = transform.position;
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
+
+        if (horizontal != 0 && isGrounded && footstepTimer <= 0f)
+        {
+            SoundManager.Instance.Play(Sounds.PlayerMove);
+            footstepTimer = footstepDelay; // Reset the timer
+        }
+
+        // Decrease the footstep timer
+        footstepTimer -= Time.deltaTime;
+    }
+
+
+    void ProcessJumpMovement()
+    {
         int currentLayerIndex = animator.GetLayerIndex("Base Layer");
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !animator.GetCurrentAnimatorStateInfo(currentLayerIndex).IsName("Player_Crouch"))
         {
@@ -62,7 +85,6 @@ public class PlayerController : MonoBehaviour
                 rb2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
             }
         }
-        
     }
 
     void ProcessPlayerAnimations(float horizontal)
@@ -126,25 +148,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Picked up key");
         scoreManager.IncreaseScore(10);
+        SoundManager.Instance.Play(Sounds.Pickup);
     }
-
-    public void DamagePlayer()
-    {
-        healthManager.health--;
-        Debug.Log("Enemy Damaged You!! Lives left: " + healthManager.health );
-        if(healthManager.health == 0)
-        {
-            KillPlayer();
-        }
-    }
-    public void KillPlayer()
-    {
-        Debug.Log("GAME OVER");
-        animator.SetTrigger("PlayerDead");
-        gameOverController.PlayerDead();
-        this.enabled = false;
-    }
-
 
 }
 

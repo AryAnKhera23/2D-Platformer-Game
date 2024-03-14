@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
-    [SerializeField] public int health = 3;
+    [SerializeField] public float health = 3;
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHearts;
     [SerializeField] private Sprite emptyHearts;

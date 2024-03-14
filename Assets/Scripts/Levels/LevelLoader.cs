@@ -13,7 +13,7 @@ namespace Assets.Scripts.Levels
     public class LevelLoader : MonoBehaviour
     {
         private Button button;
-        [SerializeField] string LevelName;
+        [SerializeField] public string LevelName;
 
 
         private void Awake()

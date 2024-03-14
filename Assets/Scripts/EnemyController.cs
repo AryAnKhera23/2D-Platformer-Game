@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -10,21 +11,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject groundDetector;
     [SerializeField] private float rayDistance;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController controller))
-        {
-            controller.DamagePlayer();
-
-        }
-    }
+    private EnemyBehaviour enemyBehaviour;
 
     private float directionChanger = 1;
 
     void Awake()
     {
+        enemyBehaviour = GetComponent<EnemyBehaviour>();
         enemyAnimator = GetComponent<Animator>();
-        
+        enemyBehaviour.enemyState = EnemyState.Patrol;
     }
 
     void Start()
@@ -37,12 +32,34 @@ public class EnemyController : MonoBehaviour
     }
     void Update()
     {
-        patrolEnemy();
+        if(enemyBehaviour.enemyState == EnemyState.Patrol)
+        {
+            PatrolEnemy();
+        }
+        else if(enemyBehaviour.enemyState == EnemyState.Idle)
+        {
+            IdleEnemy();
+        }
+        else if(enemyBehaviour.enemyState == EnemyState.Attack)
+        {
+            AttackEnemy();
+        }
+        else if(enemyBehaviour.enemyState == EnemyState.Dead)
+        {
+            DeadEnemy();
+        }
     }
 
-    private void patrolEnemy()
+    private void AttackEnemy()
+    {
+        enemyAnimator.SetBool("IsAttacking", true);
+    }
+
+    private void PatrolEnemy()
     {
         enemyAnimator.SetBool("IsWalking", true);
+        enemyAnimator.SetBool("IsAttacking", false);
+        enemyAnimator.SetBool("IsIdle", false);
         
        
         transform.Translate(directionChanger * Vector2.right * moveSpeed * Time.deltaTime);
@@ -58,5 +75,17 @@ public class EnemyController : MonoBehaviour
             transform.localScale = scaleVector;
             directionChanger = -Mathf.Sign(directionChanger);
         }
+    }
+
+    private void IdleEnemy()
+    {
+        enemyAnimator.SetBool("IsWalking", false);
+        enemyAnimator.SetBool("IsIdle", true);
+        enemyAnimator.SetBool("IsAttacking", false);
+    }
+
+    private void DeadEnemy()
+    {
+        enemyAnimator.SetBool("IsDead", true);
     }
 }

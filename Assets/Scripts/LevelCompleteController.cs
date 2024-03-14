@@ -11,6 +11,7 @@ public class LevelCompleteController : MonoBehaviour
     [SerializeField] private Button loadNextLevel;
     [SerializeField] private Button returnToMenu;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerBehaviour playerBehaviour;
     LevelManager levelManager = LevelManager.Instance;
 
     private void Awake()
@@ -24,6 +25,7 @@ public class LevelCompleteController : MonoBehaviour
     {
         levelCompleteImage.SetActive(true);
         playerController.enabled = false;
+        playerBehaviour.enabled = false;
     }
 
     private void LoadMenu()

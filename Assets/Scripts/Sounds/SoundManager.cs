@@ -104,6 +104,12 @@ public enum Sounds
 {
     ButtonClick,
     PlayerMove,
+    PlayerAttack,
     PlayerDeath,
-    BGM
+    PlayerHurt,
+    EnemyDeath,
+    EnemyAttack,
+    BGM,
+    Pickup,
+    Jump
 }

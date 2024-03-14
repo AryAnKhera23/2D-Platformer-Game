@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Levels;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class GameOverController : MonoBehaviour
 {
     [SerializeField] Button restartButton;
     [SerializeField] Button returnToMenuButton;
+    [SerializeField] GameObject LevelComplete;
    
 
     public void Awake()
@@ -17,8 +19,12 @@ public class GameOverController : MonoBehaviour
     }
     public void PlayerDead()
     {
-        SoundManager.Instance.Play(Sounds.PlayerDeath);
-        gameObject.SetActive(true); 
+        if(!LevelComplete.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
+        
+   
     }
 
     void ReloadScene()

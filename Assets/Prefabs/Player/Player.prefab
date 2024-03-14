@@ -74,6 +74,36 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1660007162405435330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702476267226846183}
+  m_Layer: 9
+  m_Name: EnemyDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1702476267226846183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660007162405435330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1173194049959009072}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3954408116764224854
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,6 +119,7 @@ GameObject:
   - component: {fileID: 5875342097665146758}
   - component: {fileID: 3799122898679522619}
   - component: {fileID: 2019520102}
+  - component: {fileID: 1386399664748934073}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -105,9 +136,10 @@ Transform:
   m_GameObject: {fileID: 3954408116764224854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 1702476267226846183}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -150,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c4d7d6470acd7bf45971042161c6e018, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -194,10 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
-  gameOverController: {fileID: 0}
   animator: {fileID: 637274510}
   speed: 8
   jumpForce: 1500
+  footstepDelay: 0.5
+  isGrounded: 0
 --- !u!50 &5875342097665146758
 Rigidbody2D:
   serializedVersion: 4
@@ -254,3 +287,24 @@ MonoBehaviour:
   - {fileID: 0}
   fullHearts: {fileID: 21300000, guid: 5eac4e0f7db9496419476269fa1f2ab8, type: 3}
   emptyHearts: {fileID: 21300000, guid: 0bb60f88a964475469e32db67ff9d903, type: 3}
+--- !u!114 &1386399664748934073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954408116764224854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db96500adbd04a45a2edfedede444a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 30
+  rayDistance: 3
+  playerHealth: 100
+  gameOverController: {fileID: 0}
+  enemyBehaviour: {fileID: 0}
+  enemyDetector: {fileID: 1660007162405435330}
+  playerHealthBar: {fileID: 0}
+  healthManager: {fileID: 0}
+  animator: {fileID: 0}

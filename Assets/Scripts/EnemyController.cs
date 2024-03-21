@@ -64,8 +64,6 @@ public class EnemyController : MonoBehaviour
        
         transform.Translate(directionChanger * Vector2.right * moveSpeed * Time.deltaTime);
        
-        
-
         RaycastHit2D hit = Physics2D.Raycast(groundDetector.transform.position, Vector2.down, rayDistance);
 
         if (!hit)
